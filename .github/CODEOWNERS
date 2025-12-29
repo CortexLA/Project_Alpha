@@ -1,0 +1,30 @@
+# ========================================================
+# 🛡️ THE GUARDIAN (DevOps/Admin)
+# Saksham owns the infrastructure and safety.
+# If a file has no specific owner, Saksham owns it.
+# ========================================================
+* @KS-space-bot 
+.github/     @KS-space-bot  
+.gitignore   @KS-space-bot  
+
+# ========================================================
+# 💻 TECH TEAM
+# ========================================================
+/frontend/   @nishantxraghav
+/backend/    @SnehaGitHubUser
+
+# ========================================================
+# 🎨 DESIGN TEAM
+# ========================================================
+/design/     @kanishkaawana-sys
+
+# ========================================================
+# 📄 DOCS & PRESENTATIONS
+# ========================================================
+/docs/       @swastiksaxena27
+README.md    @swastiksaxena27
+
+# ========================================================
+# 🔬 RESEARCH
+# ========================================================
+/research/   @rajvirbhimwal
