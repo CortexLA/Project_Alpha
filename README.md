@@ -1,107 +1,84 @@
-# React
+# ThreatWatch — Insider Threat Detection Dashboard
 
-A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
+A production-ready cybersecurity dashboard built with React, Supabase, Recharts, and Framer Motion.
 
-## 🚀 Features
+## Tech Stack
+- **React 18** + Vite
+- **Tailwind CSS** (dark/cyber theme)
+- **Supabase** (Auth + PostgreSQL + Realtime)
+- **Recharts** (charts)
+- **Framer Motion** (animations)
+- **React Router v6** (routing)
+- **React Hot Toast** (notifications)
 
-- **React 18** - React version with improved rendering and concurrent features
-- **Vite** - Lightning-fast build tool and development server
-- **Redux Toolkit** - State management with simplified Redux setup
-- **TailwindCSS** - Utility-first CSS framework with extensive customization
-- **React Router v6** - Declarative routing for React applications
-- **Data Visualization** - Integrated D3.js and Recharts for powerful data visualization
-- **Form Management** - React Hook Form for efficient form handling
-- **Animation** - Framer Motion for smooth UI animations
-- **Testing** - Jest and React Testing Library setup
+## Quick Start
 
-## 📋 Prerequisites
-
-- Node.js (v14.x or higher)
-- npm or yarn
-
-## 🛠️ Installation
-
-1. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-   
-2. Start the development server:
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
-
-## 📁 Project Structure
-
-```
-react_app/
-├── public/             # Static assets
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/          # Page components
-│   ├── styles/         # Global styles and Tailwind configuration
-│   ├── App.jsx         # Main application component
-│   ├── Routes.jsx      # Application routes
-│   └── index.jsx       # Application entry point
-├── .env                # Environment variables
-├── index.html          # HTML template
-├── package.json        # Project dependencies and scripts
-├── tailwind.config.js  # Tailwind CSS configuration
-└── vite.config.js      # Vite configuration
-```
-
-## 🧩 Adding Routes
-
-To add new routes to the application, update the `Routes.jsx` file:
-
-```jsx
-import { useRoutes } from "react-router-dom";
-import HomePage from "pages/HomePage";
-import AboutPage from "pages/AboutPage";
-
-const ProjectRoutes = () => {
-  let element = useRoutes([
-    { path: "/", element: <HomePage /> },
-    { path: "/about", element: <AboutPage /> },
-    // Add more routes as needed
-  ]);
-
-  return element;
-};
-```
-
-## 🎨 Styling
-
-This project uses Tailwind CSS for styling. The configuration includes:
-
-- Forms plugin for form styling
-- Typography plugin for text styling
-- Aspect ratio plugin for responsive elements
-- Container queries for component-specific responsive design
-- Fluid typography for responsive text
-- Animation utilities
-
-## 📱 Responsive Design
-
-The app is built with responsive design using Tailwind CSS breakpoints.
-
-
-## 📦 Deployment
-
-Build the application for production:
-
+### 1. Clone & Install
 ```bash
-npm run build
+npm install
 ```
 
-## 🙏 Acknowledgments
+### 2. Create Supabase Project
+1. Go to [supabase.com](https://supabase.com) and create a new project
+2. Copy your **Project URL** and **anon/public key** from Settings → API
 
-- Built with [Rocket.new](https://rocket.new)
-- Powered by React and Vite
-- Styled with Tailwind CSS
+### 3. Configure Environment
+```bash
+cp .env.example .env
+# Edit .env and fill in your Supabase credentials
+```
 
-Built with ❤️ on Rocket.new
+### 4. Set Up Database
+1. Open your Supabase project → SQL Editor
+2. Copy and paste the entire contents of `supabase-schema.sql`
+3. Click **Run** — this creates all tables, RLS policies, enables Realtime, and seeds mock data
+
+### 5. Run the App
+```bash
+npm run dev
+```
+
+### 6. Create Your Account
+- Go to `http://localhost:5173/signup`
+- Create an account with any email/password
+- (Or use Supabase Auth → Users to invite users)
+
+## Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔐 Auth | Supabase email/password with protected routes |
+| 📊 Dashboard | Live metrics, charts, activity feed from Supabase |
+| 👤 User Profiles | Risk scores, behavior timelines, anomaly radar |
+| 🚨 Alert Center | Full alert table with modal details + status updates |
+| 📡 Live Monitor | Realtime Supabase subscriptions, live score streams |
+| 🎭 Scenarios | 5 CERT threat scenarios with indicators & mitigations |
+| 🧠 Model Insights | Ensemble weights, feature importance, PCA visualization |
+
+## Project Structure
+```
+src/
+├── components/
+│   ├── layout/     # Sidebar, AppLayout, ProtectedRoute
+│   └── ui/         # Reusable UI components
+├── hooks/
+│   ├── useAuth.jsx      # Auth context + Supabase auth
+│   └── useRealtime.js   # Supabase realtime subscriptions
+├── lib/
+│   └── supabase.js      # Supabase client
+├── pages/               # All route pages
+├── services/
+│   └── db.js            # All Supabase DB queries
+└── types/               # TypeScript-ready type definitions
+```
+
+## Realtime Setup
+The app subscribes to `alerts` and `anomalies` tables via Supabase Realtime.
+To test it: use the **"Inject Event"** button on the Live Monitor page — it inserts a real record into Supabase which triggers the subscription and shows a toast notification.
+
+## Supabase Tables
+- `users` — monitored operator profiles with risk scores
+- `activities` — logon/file/email/web/usb events
+- `alerts` — threat detections with severity + status
+- `anomalies` — statistical deviation events
+- `scenarios` — threat playbooks
